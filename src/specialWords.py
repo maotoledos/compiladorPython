@@ -1,0 +1,8 @@
+operators = '''
+. ^ $ * + ? { } [ ] \ | / ( )
+
+'''
+
+letters = '''
+abcdefghijklmnopqrstuvwxyz
+'''
