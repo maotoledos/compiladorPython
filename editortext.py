@@ -47,7 +47,7 @@ def clicked(menu, filemenu):
 
 def changeLanguage(idiomNum, menu, firstCasc, secondCasc, thirdCasc):
     idiomObj = ESP if idiomNum == 1 else ENG
-    
+
     class Cascades:
         menu = menu
         first = firstCasc
@@ -55,23 +55,38 @@ def changeLanguage(idiomNum, menu, firstCasc, secondCasc, thirdCasc):
         third = thirdCasc
     changeValues(Cascades, idiomObj)
 
-def retrieve_input():
-    inputValue=text.get("1.0","end-1c")
-    
 
-    value = stringLex(inputValue)
-    
+def retrieve_input():
+    inputValue = text.get("1.0", "end-1c")
+
+    value, identificadores, operadores, reservados = stringLex(inputValue)
+
     LexWindow = Toplevel(root)
     LexWindow.title("Analizador Lexico")
-    LexWindow.minsize(width=300, height=300)
-    LexWindow.maxsize(width=600, height=600)
-    msg = Message(LexWindow, width=300, text=value)
-    msg.pack()
-    exitButton = Button(LexWindow, text="Salir", command=LexWindow.destroy)
-    exitButton.pack()
+    frame1 = Frame(LexWindow)
+    frame1.pack(side=TOP)
+    msg = Text(frame1)
+    msg.insert(INSERT, value)
+    # text = Message(LexWindow, width=300, text=value)
+    msg.pack(side=TOP, anchor=N, padx=5, pady=5)
+
+    frame2 = Frame(LexWindow)
+    frame2.pack(side=BOTTOM)
+    msg2 = Text(frame2, height=50, width=25)
+    msg2.insert(INSERT,identificadores)
+    msg2.pack(side=LEFT)
+    msg3 = Text(frame2, height=50, width=25)
+    msg3.insert(INSERT,operadores)
+    msg3.pack(side=LEFT)
+    msg4 = Text(frame2, height=50, width=25)
+    msg4.insert(INSERT,reservados)
+    msg4.pack(side=LEFT)
+    exitButton = Button(frame2, text="Salir", command=LexWindow.destroy)
+    exitButton.pack(side=BOTTOM)
+
 
 def open_symb_table():
-    inputValue='''
+    inputValue = '''
     Tipo de Variables:
     [int,double,float,bool,String,char,long,void,byte,const]\n
     Palabras reservadas:
@@ -81,9 +96,7 @@ def open_symb_table():
     Operadores booleanos
     [==,!=, <>, <=, >=, !]
     '''
-    
 
-    
     LexWindow = Toplevel(root)
     LexWindow.title("Tabla de simbolos")
     LexWindow.minsize(width=400, height=300)
@@ -93,13 +106,14 @@ def open_symb_table():
     exitButton = Button(LexWindow, text="Salir", command=LexWindow.destroy)
     exitButton.pack()
 
+
 root = Tk()
 
-mb=  Menubutton ( root, text="condiments", relief=RAISED )
+mb = Menubutton(root, text="condiments", relief=RAISED)
 
 root.title("Editor de texto de Python")
 
-# icon = PhotoImage(file='me.gif')   
+# icon = PhotoImage(file='me.gif')
 # root.tk.call('wm', 'iconphoto', root._w, icon)
 # root.iconbitmap('@python.xbm')
 # root.wm_iconbitmap('@/home/mauricio/Pictures/python.xbm')
@@ -113,8 +127,10 @@ menu = Menu(root)
 root.config(menu=menu)
 filemenu = Menu(menu)
 icons = PhotoImage(file='python.gif')
-icons = icons.subsample(8,8)
-menu.add_cascade(label=ESP.archivo, image=icons, compound = LEFT, menu=filemenu)
+icons = icons.subsample(8, 8)
+openfile = PhotoImage(file='help.gif')
+openfile = openfile.subsample(8, 8)
+menu.add_cascade(label=ESP.archivo, image=icons, compound=LEFT, menu=filemenu)
 
 filemenu.add_command(label=ESP.nuevo, command=newFile)
 filemenu.add_command(label=ESP.abrir, command=openFile)
@@ -124,22 +140,22 @@ filemenu.add_separator()
 filemenu.add_command(label=ESP.cerrar, command=root.quit)
 
 helpmenu = Menu(menu)
-menu.add_cascade(label=ESP.ayuda,image=icons, compound = LEFT, menu=helpmenu)
+menu.add_cascade(label=ESP.ayuda, image=openfile, compound=LEFT, menu=helpmenu)
 helpmenu.add_command(label=ESP.acerca, command=clicked)
 
 languages = Menu(menu)
-menu.add_cascade(label=ESP.idiomas,image=icons, compound = LEFT, menu=languages)
+menu.add_cascade(label=ESP.idiomas, image=icons, compound=LEFT, menu=languages)
 languages.add_command(label="Español", command=lambda: changeLanguage(
     1, menu, filemenu, helpmenu, languages))
 languages.add_command(label="Ingles", command=lambda: changeLanguage(
     2, menu, filemenu, helpmenu, languages))
 
 lex = Menu(menu)
-menu.add_cascade(label="LEX",image=icons, compound = LEFT, menu=lex)
-lex.add_command(label="Abrir",command=lambda: retrieve_input())
+menu.add_cascade(label="LEX", image=icons, compound=LEFT, menu=lex)
+lex.add_command(label="Abrir", command=lambda: retrieve_input())
 
 tbs = Menu(menu)
-menu.add_cascade(label="TBS",image=icons, compound = LEFT, menu=tbs)
-tbs.add_command(label="Abrir",command=lambda: open_symb_table())
+menu.add_cascade(label="Expresion", image=icons, compound=LEFT, menu=tbs)
+tbs.add_command(label="Abrir", command=lambda: open_symb_table())
 
 mainloop()
