@@ -2,7 +2,10 @@ from tkinter import *
 from tkinter.filedialog import *
 from esp import Encabezado as ESP
 from eng import Encabezado as ENG
+
 from functions import changeValues, stringLex
+import re
+
 
 fileName = None
 
@@ -67,7 +70,6 @@ def retrieve_input():
     frame1.pack(side=TOP)
     msg = Text(frame1)
     msg.insert(INSERT, value)
-    # text = Message(LexWindow, width=300, text=value)
     msg.pack(side=TOP, anchor=N, padx=5, pady=5)
 
     frame2 = Frame(LexWindow)
@@ -86,16 +88,24 @@ def retrieve_input():
 
 
 def open_symb_table():
-    inputValue = '''
-    Tipo de Variables:
-    [int,double,float,bool,String,char,long,void,byte,const]\n
-    Palabras reservadas:
-    [for,while,if,catch,else,do,try,throw,struct]\n
-    Operadores:
-    [+,-,*,/,%,**,++,--,^]\n
-    Operadores booleanos
-    [==,!=, <>, <=, >=, !]
-    '''
+    inputValue = text.get("1.0", "end-1c")
+    output = ""
+    token = ""    
+
+    splitLines = inputValue.splitlines()
+    for numLine, textLine in enumerate(splitLines):
+        token= ""
+        for charLength, letter in enumerate(textLine):
+            spaceOrTab = False
+            spaceOrTab = re.match(r'(\s|\t)',letter)
+            if spaceOrTab:
+                continue
+            
+            output = output + letter
+def open_tree_expression():
+     expression = text.get("1.0","end-1c")
+     print(expression)
+
 
     LexWindow = Toplevel(root)
     LexWindow.title("Tabla de simbolos")
@@ -113,10 +123,6 @@ mb = Menubutton(root, text="condiments", relief=RAISED)
 
 root.title("Editor de texto de Python")
 
-# icon = PhotoImage(file='me.gif')
-# root.tk.call('wm', 'iconphoto', root._w, icon)
-# root.iconbitmap('@python.xbm')
-# root.wm_iconbitmap('@/home/mauricio/Pictures/python.xbm')
 root.minsize(width=400, height=400)
 root.maxsize(width=600, height=600)
 
@@ -145,10 +151,8 @@ helpmenu.add_command(label=ESP.acerca, command=clicked)
 
 languages = Menu(menu)
 menu.add_cascade(label=ESP.idiomas, image=icons, compound=LEFT, menu=languages)
-languages.add_command(label="Español", command=lambda: changeLanguage(
-    1, menu, filemenu, helpmenu, languages))
-languages.add_command(label="Ingles", command=lambda: changeLanguage(
-    2, menu, filemenu, helpmenu, languages))
+languages.add_command(label="Español", command=lambda: changeLanguage(1, menu, filemenu, helpmenu, languages))
+languages.add_command(label="Ingles", command=lambda: changeLanguage(2, menu, filemenu, helpmenu, languages))
 
 lex = Menu(menu)
 menu.add_cascade(label="LEX", image=icons, compound=LEFT, menu=lex)
