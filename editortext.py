@@ -103,10 +103,8 @@ def open_symb_table():
             
             output = output + letter
 def open_tree_expression():
-     expression = text.get("1.0","end-1c")
-     print(expression)
-
-
+    expression = text.get("1.0","end-1c")
+    print(expression)
     LexWindow = Toplevel(root)
     LexWindow.title("Tabla de simbolos")
     LexWindow.minsize(width=400, height=300)

@@ -1,0 +1,16 @@
+{
+	"es": {
+		"file": "Archivo",
+		"close": "Cerrar",
+		"language": "Idioma",
+		"es": "Español",
+		"en": "Inglés"
+	},
+	"en": {
+		"file": "File",
+		"close": "Close",
+		"language": "Language",
+		"es": "Spanish",
+		"en": "English"
+	}
+}

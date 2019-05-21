@@ -185,7 +185,7 @@ def evaluate_prefix(formula):
 
 
 if __name__ == '__main__':
-    infix_to_postfix('1+(3+4*6+6*1)*2/3')
+    infix_to_postfix('1 + ( 3 + 4 * 6 + 7 * 1 ) * 2 / 3')
     infix_to_prefix('(1+(3+4*6+6*1)*(2/3))')
     print
     #evaluate_inflix('1+(3+4*6+6*1)*2/3')
