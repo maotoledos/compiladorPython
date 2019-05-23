@@ -126,3 +126,71 @@ def validateToken(token):
     for pat in lexPatt:
         return ' asigOp('+pat.group()+')',3
     return False, 0
+
+
+def convertToJava(inputText):
+    finalLex = ""
+    token = ""
+    identificadores = ""
+    operadores = ""
+    reservados=""
+    arrayLex = inputText.splitlines()
+    for line, textLine in enumerate(arrayLex):
+        token=""
+        finalLex = finalLex+str(line+1)+'>>'
+        for i, char in  enumerate(textLine):
+            spaceOrTab = False
+            spaceOrTab = re.match(r'(\s|\t)',char)
+            # Si hay espacio
+            if spaceOrTab:
+                print(str(i)+token)
+                tokenText, numero = validateToken(token)
+
+                if numero == 1:
+                    identificadores= identificadores + tokenText+'\n'
+                elif numero == 2:
+                    operadores= operadores + tokenText+'\n'
+                elif numero == 3:
+                    reservados= reservados + tokenText+'\n'
+                    
+                if tokenText != False:
+                    finalLex = finalLex + tokenText
+                token = ''
+                continue
+            # Fin de linea
+            if i == len(textLine)-1:
+                token = token + char
+                tokenText, numero= validateToken(token)
+                if numero == 1:
+                    identificadores= identificadores + tokenText+'\n'
+                elif numero == 2:
+                    operadores= operadores + tokenText+'\n'
+                elif numero == 3:
+                    reservados= reservados + tokenText+'\n'
+
+                if tokenText != False:
+                    finalLex = finalLex + tokenText
+                token = ''
+                continue
+
+            # braces commas and python's enemy (;)
+            braces = re.match(r'(\(|\)|\{|\}|\;|,|=|>|<)', char)
+            if braces:
+                tokenText, numero = validateToken(token)
+                if numero == 1:
+                    identificadores= identificadores + tokenText+'\n'
+                elif numero == 2:
+                    operadores= operadores + tokenText+'\n'
+                elif numero == 3:
+                    reservados= reservados + tokenText+'\n'
+
+                if tokenText != False:
+                    finalLex = finalLex + tokenText
+                finalLex = finalLex + ' brakets('+braces.group()+')'
+                token = ''
+                continue
+            
+            
+            token = token + char
+        finalLex = finalLex+'\n'
+    return finalLex, identificadores, operadores, reservados

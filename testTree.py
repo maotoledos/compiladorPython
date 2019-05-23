@@ -1,5 +1,7 @@
 from tkinter import *
 import time
+
+
 root=Tk()
 root.geometry("1200x600")
 myCanvas = Canvas(root, width=1200,height=600,bg="black")
@@ -101,3 +103,5 @@ m.place(x=10,y=460)
 xc=160
 tr.postorder()
 root.mainloop()
+
+

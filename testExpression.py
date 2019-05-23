@@ -10,7 +10,6 @@ In-order traversal → infix
 Post-order traversal → postfix
 Pre-order traversal → prefix
 '''
-from __future__ import division
 import random
 
 
