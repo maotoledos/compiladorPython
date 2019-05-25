@@ -66,9 +66,8 @@ def changeLanguage(idiomNum, menu, firstCasc, secondCasc, thirdCasc):
 
 def retrieve_input():
     inputValue = text.get("1.0", "end-1c")
-
     value, identificadores, operadores, reservados = stringLex(inputValue)
-
+    print(operadores)
     LexWindow = Toplevel(root)
     LexWindow.title("Analizador Lexico")
     frame1 = Frame(LexWindow)
@@ -76,7 +75,6 @@ def retrieve_input():
     msg = Text(frame1)
     msg.insert(INSERT, value)
     msg.pack(side=TOP, anchor=N, padx=5, pady=5)
-
     frame2 = Frame(LexWindow)
     frame2.pack(side=BOTTOM)
     msg2 = Text(frame2, height=50, width=25)
@@ -401,8 +399,10 @@ def context_action(self):
 
 def changeToJava():
     inputValue = text.get("1.0", "end-1c")
-    convertToJava(convertToJava)
-
+    finalLex, identificadores, operadores, reservados = convertToJava(inputValue)
+    print(finalLex)
+    text.delete(0.0, END)
+    text.insert("1.0",finalLex)
 
 
 

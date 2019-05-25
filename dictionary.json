@@ -1,16 +1,46 @@
 {
-	"es": {
+	"c++": {
 		"file": "Archivo",
 		"close": "Cerrar",
 		"language": "Idioma",
 		"es": "Español",
-		"en": "Inglés"
+		"en": "Inglés",
+		"int": "int",
+		"double": "double",
+		"float": "float",
+		"bool": "bool",
+		"string": "string",
+		"char": "char",
+		"long": "long",
+		"void": "void",
+		"byte": "byte",
+		"const": "const",
+		"unsigned":"unsigned",
+		"signed":"signed",
+		"short":"short",
+		"wchar_t":"wchar_t",
+		"cout<<":"cout<<"
 	},
-	"en": {
-		"file": "File",
-		"close": "Close",
-		"language": "Language",
-		"es": "Spanish",
-		"en": "English"
+	"java": {
+		"file": "Archivo",
+		"close": "Cerrar",
+		"language": "Idioma",
+		"es": "Español",
+		"en": "Inglés",
+		"int": "int",
+		"double": "Double",
+		"float": "Float",
+		"bool": "Bool",
+		"string": "string",
+		"char": "Char",
+		"long": "long",
+		"void": "Void",
+		"byte": "byte",
+		"const": "Const",
+		"unsigned":"",
+		"signed":"",
+		"short":"short",
+		"wchar_t":"int",
+		"cout<<":"System.out.println("
 	}
 }
