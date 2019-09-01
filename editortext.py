@@ -12,7 +12,7 @@ import random
 import time
 
 
-fileName = None
+fileName = "Sin nombre"
 
 
 def newFile():
